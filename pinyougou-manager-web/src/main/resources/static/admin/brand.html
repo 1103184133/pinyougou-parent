@@ -12,16 +12,55 @@
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugins/angularjs/angular.min.js"></script>
-
+	<!--分页组件开始-->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css"/>
+	<!--分页组件结束-->
 	<script type="text/javascript">
-        var app = angular.module('pinyougou', []);
+        var app = angular.module('pinyougou', ['pagination']);
         app.controller('brandController', function ($scope, $http) {
             $scope.finaAll = function () {
                 $http.get('../brand/findAll').success(function (resp) {
                     $scope.list = resp;
                 });
             };
-            $scope.finaAll();
+            $scope.paginationConf = {
+                currentPage: 1,
+                totalItems: 10,
+                itemsPerPage: 10,
+                perPageOptions: [10, 20, 30, 40, 50],
+                onChange: function () {
+                    $scope.reloadList();
+                }
+            };
+
+            //刷新列表
+            $scope.reloadList = function () {
+                $scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+            };
+
+            //分页
+            $scope.findPage = function (page, size) {
+                $http.get('../brand/findPage?page='+page+'&size='+size).success(function (resp) {
+                    $scope.list = resp.rows;
+                    $scope.paginationConf.totalItems = resp.total;
+                })
+            };
+
+            //新增
+            $scope.add = function () {
+                $http.post('../brand/add',$scope.entity).success(function (resp) {
+                    if (resp.success) {
+                        $scope.reloadList();
+                    } else {
+                        alert(resp.message);
+                    }
+                })
+            };
+
+
+
+
         });
 	</script>
 </head>
@@ -79,7 +118,8 @@
 
 			                      </tbody>
 			                  </table>
-			                  <!--数据列表/-->                        
+			                  <!--数据列表/-->
+							  <tm-pagination conf="paginationConf"></tm-pagination>
 							  
 							 
                         </div>
@@ -103,16 +143,16 @@
 			<table class="table table-bordered table-striped"  width="800px">
 		      	<tr>
 		      		<td>品牌名称</td>
-		      		<td><input  class="form-control" placeholder="品牌名称" >  </td>
+		      		<td><input  class="form-control" placeholder="品牌名称" ng-model="entity.name">  </td>
 		      	</tr>		      	
 		      	<tr>
 		      		<td>首字母</td>
-		      		<td><input  class="form-control" placeholder="首字母">  </td>
+		      		<td><input  class="form-control" placeholder="首字母" ng-model="entity.firstChar">  </td>
 		      	</tr>		      	
 			 </table>				
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="add()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

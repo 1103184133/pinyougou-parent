@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.entity.PageResult;
+import com.pinyougou.entity.Result;
 import com.pinyougou.mapper.BrandMapper;
 import com.pinyougou.pojo.Brand;
 import com.pinyougou.sellergoods.service.BrandService;
@@ -28,5 +29,10 @@ public class BrandServiceImpl implements BrandService {
         PageHelper.startPage(pageNum, pageSize);
         Page<Brand> page = (Page<Brand>) brandMapper.selectByExample(null);
         return new PageResult<>(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public void add(Brand brand) {
+        brandMapper.insert(brand);
     }
 }
