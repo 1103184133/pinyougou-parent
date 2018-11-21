@@ -30,6 +30,7 @@ def projectDeps =
 //                "zookeeper"                      : "org.apache.zookeeper:zookeeper:${zookeeperVersion}",
 //                "zkclient"                       : "com.github.sgroschupf:zkclient:${zkclientVersion}",
                 "kaptcha"                        : "com.github.penggle:kaptcha:${kaptchaVersion}",
+                "javassist"                      : "org.javassist:javassist:${javassistVersion}",
         ]
 
 allprojects {

@@ -10,4 +10,5 @@ dependencies{
     compile(deps["pinyougou-sellergoods-interface"])
     compile(deps["spring-boot-starter-web"])
     compile(deps["spring-boot-starter-dubbo"])
+    compile(deps["javassist"])
 }

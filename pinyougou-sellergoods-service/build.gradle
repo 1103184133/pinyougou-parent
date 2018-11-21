@@ -11,4 +11,5 @@ dependencies{
     compile(deps["spring-boot-starter-web"])
     compile(deps["spring-boot-starter-dubbo"])
     compile(deps["pinyougou-dao"])
+    compile(deps["javassist"])
 }
