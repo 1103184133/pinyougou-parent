@@ -1,0 +1,10 @@
+
+dependencies {
+    compile(deps["pinyougou-pojo"])
+    compile(deps["spring-boot-starter"])
+    compile(deps["spring-boot-starter-jdbc"])
+    compile(deps["mybatis-spring-boot-starter"])
+    compile(deps["pagehelper-spring-boot-starter"])
+    compile(deps["mysql-connector-java"])
+    testCompile(deps["spring-boot-starter-test"])
+}

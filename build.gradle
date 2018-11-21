@@ -1,0 +1,97 @@
+//集中定义版本号
+def projectDeps =
+        [
+                "pinyougou-common"               : "com.pinyougou:pinyougou-common:${pinyougouVersion}",
+                "pinyougou-pojo"                 : "com.pinyougou:pinyougou-pojo:${pinyougouVersion}",
+                "pinyougou-dao"                  : "com.pinyougou:pinyougou-dao:${pinyougouVersion}",
+                "pinyougou-sellergoods-interface": "com.pinyougou:pinyougou-sellergoods-interface:${pinyougouVersion}",
+                "pinyougou-sellergoods-service"  : "com.pinyougou:pinyougou-sellergoods-service:${pinyougouVersion}",
+
+                "lombok"                         : "org.projectlombok:lombok:${lombokVersion}",
+                //spring boot相关
+                "spring-boot-gradle-plugin"      : "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}",
+                "spring-boot-starter"            : "org.springframework.boot:spring-boot-starter:${springBootVersion}",
+                "spring-boot-starter-web"        : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                "spring-boot-starter-activemq"   : "org.springframework.boot:spring-boot-starter-activemq:${springBootVersion}",
+                "spring-boot-starter-data-redis" : "org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}",
+                "spring-boot-starter-data-solr"  : "org.springframework.boot:spring-boot-starter-data-solr:${springBootVersion}",
+                "spring-boot-starter-freemarker" : "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}",
+                "spring-boot-starter-security"   : "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",
+                "spring-boot-starter-jdbc"       : "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}",
+                "spring-boot-starter-test"       : "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+                "spring-security-test"           : "org.springframework.security:spring-security-test:${springBootVersion}",
+                //mybatis
+                "mybatis-spring-boot-starter"    : "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}",
+                "pagehelper-spring-boot-starter" : "com.github.pagehelper:pagehelper-spring-boot-starter:${pageHelperVersion}",
+                "mybatis-paginator"              : "com.github.miemiedev:mybatis-paginator:${mybatisPaginatorVersion}",
+                "mysql-connector-java"           : "mysql:mysql-connector-java:${mysqlConnectorVersion}",
+                //dubbo相关                
+                "spring-boot-starter-dubbo"      : "com.gitee.reger:spring-boot-starter-dubbo:${dubboVersion}",
+//                "zookeeper"                      : "org.apache.zookeeper:zookeeper:${zookeeperVersion}",
+//                "zkclient"                       : "com.github.sgroschupf:zkclient:${zkclientVersion}",
+                "kaptcha"                        : "com.github.penggle:kaptcha:${kaptchaVersion}",
+        ]
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven'
+
+    group = 'com.pinyougou'
+    version = '1.0.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    buildscript {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+        }
+    }
+
+    ext {
+        deps = projectDeps
+    }
+
+    dependencies {
+        compileOnly(deps["lombok"])
+    }
+
+}
+
+/*
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    buildscript {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        }
+    }
+}
+*/
+
+/*
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+    implementation('org.springframework.boot:spring-boot-starter-freemarker')
+    implementation('org.springframework.boot:spring-boot-starter-jdbc')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly('mysql:mysql-connector-java')
+    compileOnly('org.projectlombok:lombok')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
+}
+*/
+

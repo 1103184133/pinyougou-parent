@@ -1,0 +1,9 @@
+rootProject.name = 'pinyougou-parent'
+include 'pinyougou-pojo'
+include 'pinyougou-common'
+include 'pinyougou-dao'
+include 'pinyougou-manager-web'
+include 'pinyougou-sellergoods-interface'
+include 'pinyougou-sellergoods-service'
+include 'pinyougou-shop-web'
+

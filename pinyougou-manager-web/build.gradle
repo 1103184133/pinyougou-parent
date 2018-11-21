@@ -1,0 +1,13 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+buildscript {
+    dependencies {
+        classpath(deps["spring-boot-gradle-plugin"])
+    }
+}
+
+dependencies{
+    compile(deps["pinyougou-sellergoods-interface"])
+    compile(deps["spring-boot-starter-web"])
+    compile(deps["spring-boot-starter-dubbo"])
+}

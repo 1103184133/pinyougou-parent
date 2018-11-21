@@ -1,0 +1,15 @@
+server:
+  port: 9002
+spring:
+  dubbo:
+    protocol: dubbo
+    application:
+      name: pinyougou-manager-web     # 必填 服务治理 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样，此参数不是匹配条件，你当前项目叫什么名字就填什么，和提供者消费者角色无关，比如：kylin应用调用了morgan应用的服务，则kylin项目配成kylin，morgan项目配成morgan，可能kylin也提供其它服务给别人使用，但kylin项目永远配成kylin，这样注册中心将显示kylin依赖于morgan 1.0.16以上版本
+      compiler: javassist     # 可选 性能优化 Java字节码编译器，用于动态类的生成，可选：jdk或javassist 2.1.0以上版本
+      logger: slf4j           # 可选 性能优化 日志输出方式，可选：slf4j,jcl,log4j,jdk 2.2.0以上版本
+    base-package: com.pinyougou.manager.controller
+    registry:
+      protocol: zookeeper
+      address: 192.168.66.101
+      port: 2181
+
