@@ -61,9 +61,12 @@ allprojects {
 
     clean.doFirst {
         println('')
-        println(project.file("/build.gradle"))
-        println('before clean task')
-        println('')
+        def outFolder = project.file("/out")
+        if (outFolder.exists()) {
+            println("------------------------------------")
+            println("cleaning out : " + outFolder.deleteDir() ? "success" : "faild")
+            println("------------------------------------")
+        }
     }
 
     //打包源码
@@ -77,12 +80,12 @@ allprojects {
     publishing {
         publications {
             if(project.pluginManager.hasPlugin("org.springframework.boot")){
-                bootJava(MavenPublication){
+                /*bootJava(MavenPublication){
                     artifact bootJar
                 }
                 bootJavaWar(MavenPublication){
                     artifact bootWar
-                }
+                }*/
             }else{
                 maven(MavenPublication) {
                     //如果是war包填写components.web，如果是jar包填写components.java
